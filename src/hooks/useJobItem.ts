@@ -12,14 +12,17 @@ export function useJobItem(id: number | null) {
 
   useEffect(() => {
     if (!id) return;
+    const controller = new AbortController();
+    const signal = controller.signal;
     const fetchItem = async () => {
       setIsLoading(true);
-      const result = await fetch(`${BASE_URL}/${id}`);
+      const result = await fetch(`${BASE_URL}/${id}`, { signal });
       const data: JobItemResponse = await result.json();
       setIsLoading(false);
       setJobItem(data.jobItem);
     };
     fetchItem();
+    return () => controller.abort();
   }, [id]);
 
   return [jobItem, isLoading] as const;

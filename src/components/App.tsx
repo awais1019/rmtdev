@@ -13,6 +13,7 @@ import JobList from "./JobList";
 import SortingControls from "./SortingControls";
 import ResultsCount from "./ResultsCount";
 import { useJobItems } from "../hooks/useJobItems";
+import useDebounce from "../hooks/useDebounce";
 
 
 
@@ -21,7 +22,8 @@ import { useJobItems } from "../hooks/useJobItems";
 
 function App() {
   const [searchValue, setSearchValue] = useState("");
-  const [jobList,isLoading,totalNumberofResults]=useJobItems(searchValue)
+  const debouncedValue=useDebounce(searchValue,300)
+  const [jobList,isLoading,totalNumberofResults]=useJobItems(debouncedValue)
 
   
   return (
