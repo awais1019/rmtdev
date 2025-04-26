@@ -16,19 +16,24 @@ import { useJobItems } from "../hooks/useJobItems";
 import useDebounce from "../hooks/useDebounce";
 import { Toaster } from "react-hot-toast";
 
-
-
-
-
-
 function App() {
   const [searchValue, setSearchValue] = useState("");
-  const debouncedValue=useDebounce(searchValue,300)
-  const {data:jobList,isLoading}=useJobItems(debouncedValue)
-     const slicedJobList=useMemo(()=>jobList?.slice(0,7) || [],[jobList])
-    const totalNumOfResults=jobList?.length || 0;
+  const debouncedValue = useDebounce(searchValue, 300);
+  const { data: jobList, isLoading } = useJobItems(debouncedValue);
+  const [currentPage, setCurrentPage ] = useState(1);
 
-  
+  const slicedJobList = useMemo(() => jobList?.slice(currentPage*7-7,currentPage*7)||[],[currentPage,jobList])
+  const totalNumOfResults = jobList?.length || 0;
+  const totalNumOfPages=totalNumOfResults/7;
+
+  const handlePageChange = (direction: "previous" | "next") => {
+    if (direction === "next") {
+      setCurrentPage((prev) => prev + 1);
+    } else if (direction === "previous") {
+      setCurrentPage((prev) => prev - 1);
+    }
+  };
+
   return (
     <>
       <Background />
@@ -46,16 +51,16 @@ function App() {
       <Container>
         <Sidebar>
           <SidebarTop>
-            <ResultsCount totalNumberofResults={totalNumOfResults}  />
+            <ResultsCount totalNumberofResults={totalNumOfResults} />
             <SortingControls />
           </SidebarTop>
           <JobList jobItems={slicedJobList} isLoading={isLoading} />
-          <PaginationControls />
+          <PaginationControls currentPage={currentPage} handlePageChange={handlePageChange} totalNumOfPages={totalNumOfPages} />
         </Sidebar>
         <JobItemContent />
       </Container>
       <Footer />
-      <Toaster position="top-right"/>
+      <Toaster position="top-right" />
     </>
   );
 }
