@@ -22,3 +22,5 @@ export type JobItemDescription=JobItem & {
   salary:string;
 
 }
+export type SortBy="relevant" | "recent"
+export type PageDirection="previous" | "next"

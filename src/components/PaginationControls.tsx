@@ -1,7 +1,8 @@
 import { ArrowLeftIcon, ArrowRightIcon } from "@radix-ui/react-icons";
+import { PageDirection } from "../lib/types";
 
 type Props = {
-  handlePageChange: (direction: "next" | "previous") => void;
+  handlePageChange: (direction: PageDirection) => void;
   currentPage: number;
   totalNumOfPages: number;
 };
@@ -31,7 +32,7 @@ export default function PaginationControls({
   );
 }
 type PaginationButtonProps = {
-  direction: "next" | "previous";
+  direction: PageDirection;
   currentPage: number;
   onClick: () => void;
 };
