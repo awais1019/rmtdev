@@ -1,3 +1,12 @@
+import { useBookMarkIdsContext } from "../context/BookMarkItemIdProvider";
+import JobList from "./JobList";
+
 export default function BookmarksPopover() {
-  return <div className="bookmarks-popover"></div>;
+  const { bookMarkedJobItems, isLoading } = useBookMarkIdsContext();
+
+  return (
+    <div className="bookmarks-popover">
+      <JobList isLoading={isLoading} jobItems={bookMarkedJobItems} />
+    </div>
+  );
 }

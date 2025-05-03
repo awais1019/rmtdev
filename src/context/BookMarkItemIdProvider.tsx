@@ -1,9 +1,13 @@
-import { createContext, ReactNode, useContext, useState } from "react";
+import { createContext, ReactNode, useContext } from "react";
 import { useLocalStorage } from "../hooks/useLocalStorage";
+import { JobItemDescription } from "../lib/types";
+import useJobItems from "../hooks/useJobItems";
 
 type BookMarkContextProps = {
   bookMarkIds: number[];
   handleToogleBookMark: (id: number) => void;
+  bookMarkedJobItems: JobItemDescription[];
+  isLoading: boolean;
 };
 export const BookMarkContext = createContext<BookMarkContextProps | null>(null);
 
@@ -12,7 +16,11 @@ export default function BookMarkItemIdProvider({
 }: {
   children: ReactNode;
 }) {
-  const [bookMarkIds, setBookMarkedIds] = useLocalStorage<number[]>("BookmarkIds",[]);
+  const [bookMarkIds, setBookMarkedIds] = useLocalStorage<number[]>(
+    "BookmarkIds",
+    []
+  );
+  const { bookMarkedJobItems, isLoading } = useJobItems(bookMarkIds);
 
   const handleToogleBookMark = (id: number) => {
     if (bookMarkIds.includes(id)) {
@@ -27,17 +35,21 @@ export default function BookMarkItemIdProvider({
       value={{
         bookMarkIds,
         handleToogleBookMark,
+        bookMarkedJobItems,
+        isLoading,
       }}
     >
       {children}
     </BookMarkContext.Provider>
   );
 }
-export function ProvideContext(){
+export function useBookMarkIdsContext() {
   const context = useContext(BookMarkContext);
-  
-    if (!context) {
-      throw new Error("BookMarkContext is undefined. Wrap your component with BookMarkProvider.");
-    }
-    return context;
+
+  if (!context) {
+    throw new Error(
+      "BookMarkContext is undefined. Wrap your component with BookMarkProvider."
+    );
+  }
+  return context;
 }

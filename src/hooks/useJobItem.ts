@@ -8,7 +8,7 @@ type JobItemResponse = {
   jobItem: JobItemDescription;
 };
 
-const fetchItem = async (
+export const fetchItem = async (
   id: number | null,
   signal: AbortSignal
 ): Promise<JobItemDescription> => {
