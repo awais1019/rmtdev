@@ -1,12 +1,9 @@
+import { useSearchQueryContext } from "../context/SearchQueryProvider";
 
 
-type Props={
-  searchValue:string;
-  onSetSearchValue:(value:string)=>void
-
-}
-export default function SearchForm({searchValue,onSetSearchValue}:Props) {
-
+export default function SearchForm() {
+  
+  const {searchValue,handleSearchValue} =useSearchQueryContext()
   return (
     <form
       onSubmit={(e) => {
@@ -20,7 +17,7 @@ export default function SearchForm({searchValue,onSetSearchValue}:Props) {
       </button>
 
       <input
-        onChange={(e) => onSetSearchValue(e.target.value)}
+        onChange={(e) => handleSearchValue(e.target.value)}
         value={searchValue}
         spellCheck="false"
         type="text"

@@ -1,11 +1,7 @@
-import { SortBy } from "../lib/types";
+import { useJobItemsContext } from "../context/JobItemsProvider";
 
-type Props = {
-  onClick: (sortBy: SortBy) => void;
-  sortBy: SortBy;
-};
-
-export default function SortingControls({ onClick, sortBy }: Props) {
+export default function SortingControls() {
+  const { sortBy, handleSortBy: onClick } = useJobItemsContext();
   return (
     <section className="sorting">
       <i className="fa-solid fa-arrow-down-short-wide"></i>
