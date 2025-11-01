@@ -397,8 +397,6 @@ body::-webkit-scrollbar {
   background-color: #d96a46;
 } */
 
-.job-item__middle {
-}
 
 .job-item__company {
   font-size: 13px;
@@ -726,8 +724,7 @@ body::-webkit-scrollbar {
   user-select: none;
 }
 
-.job-details__other {
-}
+
 
 .job-details__footer {
   margin-left: 42px;
@@ -1022,8 +1019,6 @@ body::-webkit-scrollbar {
   border-left: 5px solid #ccd1d3;
 }
 
-.spinner--search {
-}
 
 .spinner--job-details {
   left: 50%;

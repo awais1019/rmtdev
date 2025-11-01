@@ -8,7 +8,6 @@ import BookmarksButton from "./BookmarksButton";
 import Sidebar, { SidebarTop } from "./Sidebar";
 import JobItemContent from "./JobItemContent";
 import PaginationControls from "./PaginationControls";
-import JobList from "./JobList";
 import SortingControls from "./SortingControls";
 import ResultsCount from "./ResultsCount";
 import { Toaster } from "react-hot-toast";
