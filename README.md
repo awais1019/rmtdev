@@ -81,7 +81,6 @@ src/
 | **useLocalStorage** | Stores and retrieves bookmark IDs from localStorage.           |
 | **useSearchQuery**  | Returns job results based on current search input.             |
 
----
 
 ## 🧭 Application Flow
 
